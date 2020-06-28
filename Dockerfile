@@ -1,8 +1,11 @@
-FROM alpine:3.12.0
+FROM ubuntu:18.04
 
 WORKDIR /tmp
 
-RUN apk add --no-cache curl
+RUN apt-get update \
+    && apt-get install -y curl unzip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # protoc
 ARG PROTOC_VERSION=3.12.3
