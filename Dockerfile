@@ -21,6 +21,9 @@ RUN curl -L https://github.com/pseudomuto/protoc-gen-doc/releases/download/v$GEN
 
 WORKDIR /
 
+ADD entrypoint.sh .
+
 VOLUME ["/out", "/protos"]
 
-ENTRYPOINT ["protoc"]
+ENTRYPOINT ["entrypoint.sh"]
+CMD ["--doc_opt=html,index.html"]
