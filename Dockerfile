@@ -25,5 +25,5 @@ ADD entrypoint.sh .
 
 VOLUME ["/out", "/protos"]
 
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
 CMD ["--doc_opt=html,index.html"]
