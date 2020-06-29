@@ -9,6 +9,7 @@ RUN sudo apt-get update \
 ARG PROTOC_VERSION=3.12.3
 RUN curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v$PROTOC_VERSION/protoc-$PROTOC_VERSION-linux-x86_64.zip \
     && sudo unzip protoc-$PROTOC_VERSION-linux-x86_64.zip -d /usr/local \
+    && chmod 755 /usr/local/bin/protoc \
     && rm protoc-$PROTOC_VERSION-linux-x86_64.zip
 
 # protogendoc
