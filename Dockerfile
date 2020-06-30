@@ -1,4 +1,4 @@
-FROM cimg/base:2020.06
+FROM cimg/go:1.14.4
 
 RUN sudo apt-get update \
     && sudo apt-get install -y curl unzip \
@@ -17,3 +17,11 @@ ARG GEN_DOC_VERSION=1.3.2
 RUN curl -L https://github.com/pseudomuto/protoc-gen-doc/releases/download/v$GEN_DOC_VERSION/protoc-gen-doc-$GEN_DOC_VERSION.linux-amd64.go1.12.6.tar.gz | tar -xz \
     && sudo install protoc-gen-doc-$GEN_DOC_VERSION.linux-amd64.go1.12.6/protoc-gen-doc /usr/local/bin \
     && rm -rf protoc-gen-doc-$GEN_DOC_VERSION.linux-amd64.go1.12.6
+
+# gogo/proto
+COPY go.mod .
+COPY go.sum .
+COPY main.go .
+RUN go mod download \
+    && go mod vendor \
+    && rm go.mod go.sum main.go
