@@ -19,9 +19,13 @@ RUN curl -L https://github.com/pseudomuto/protoc-gen-doc/releases/download/v$GEN
     && rm -rf protoc-gen-doc-$GEN_DOC_VERSION.linux-amd64.go1.12.6
 
 # gogo/proto
+ENV VENDOR_PATH=/home/circleci/vendor
+WORKDIR /home/circleci
 COPY go.mod .
 COPY go.sum .
 COPY main.go .
 RUN go mod download \
     && go mod vendor \
     && rm go.mod go.sum main.go
+
+WORKDIR /home/circleci/project
